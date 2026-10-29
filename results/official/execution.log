@@ -1,0 +1,61 @@
+Warning message:
+`case_match()` was deprecated in dplyr 1.2.0.
+ℹ Please use `recode_values()` instead. 
+
+Attaching package: ‘yardstick’
+
+The following object is masked from ‘package:generics’:
+
+    accuracy
+
+Bootstrapping AUPRC:
+Running bootstraps...
+Computing confidence intervals...
+Bootstrapping precision at minimum sensitivity:
+Running bootstraps...
+Computing confidence intervals...
+Bootstrapping recall at minimum sensitivity:
+Running bootstraps...
+Computing confidence intervals...
+Bootstrapping precision at threshold:
+Running bootstraps...
+Computing confidence intervals...
+Bootstrapping recall at threshold:
+Running bootstraps...
+Computing confidence intervals...
+   ExperimentCellType                    pred_uid     n positives negatives
+               <char>                      <char> <int>     <int>     <int>
+1:               K562          ABC.powerlaw.Score  3852       101      3751
+2:               K562          baseline.distToTSS  3852       101      3751
+3:               K562     baseline.nearestExprTSS  3852       101      3751
+4:               K562    baseline.nearestExprGene  3852       101      3751
+5:               K562 baseline.within100kbExprTSS  3852       101      3751
+   missing_predictions
+                 <int>
+1:                 521
+2:                   0
+3:                   0
+4:                   0
+5:                   0
+Index: <pred_uid>
+   cell_type           pred_uid     AUPRC AUPRC_lowerCi AUPRC_upperCi
+      <char>             <char>     <num>         <num>         <num>
+1:      K562 ABC.powerlaw.Score 0.5882354     0.4820647     0.6792520
+2:      K562 baseline.distToTSS 0.4017944     0.2932158     0.4939654
+   MinSensitivity PrecMinSens PrecMinSens_lowerCi PrecMinSens_upperCi
+            <num>       <num>               <num>               <num>
+1:            0.7   0.4896552           0.4069028           0.5677375
+2:            0.7   0.2806324           0.2272813           0.3386150
+   RecallMinSens RecallMinSens_lowerCi RecallMinSens_upperCi ThresholdMinSens
+           <num>                 <num>                 <num>            <num>
+1:     0.7029703             0.6120734             0.7941176       1.9373e-02
+2:     0.7029703             0.6020766             0.8000000      -3.4426e+04
+   Threshold PrecThresh PrecThresh_lowerCi PrecThresh_upperCi RecallThresh
+       <num>      <num>              <num>              <num>        <num>
+1:      0.02  0.4895105          0.4130559          0.5739094    0.6930693
+2:        NA         NA                 NA                 NA           NA
+   RecallThresh_lowerCi RecallThresh_upperCi
+                  <num>                <num>
+1:             0.598334            0.7727273
+2:                   NA                   NA
+Official numerical reproduction verified. Outputs: results/official/

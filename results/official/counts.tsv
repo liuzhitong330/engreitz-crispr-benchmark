@@ -1,0 +1,6 @@
+ExperimentCellType	pred_uid	n	positives	negatives	missing_predictions
+K562	ABC.powerlaw.Score	3852	101	3751	521
+K562	baseline.distToTSS	3852	101	3751	0
+K562	baseline.nearestExprTSS	3852	101	3751	0
+K562	baseline.nearestExprGene	3852	101	3751	0
+K562	baseline.within100kbExprTSS	3852	101	3751	0

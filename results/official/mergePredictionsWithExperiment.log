@@ -1,0 +1,31 @@
+Reading CRISPR data in: resources/example/EPCrisprBenchmark_Fulco2019_K562_GRCh38.tsv.gz
+	Loaded CRISPR data for 5091 E-G pairs
+
+Loading prediction files:
+	Loading predictions for: ABC
+		Reading: resources/example/ABC_K562_Fulco2019Genes_GRCh38.tsv.gz
+		Loaded predictions for 55039 E-G pairs
+Filtering out predictions overlapping gene TSS for:
+	ABC
+Running QC on pred_config file
+Done
+Running QC on predictions:
+Done
+Running QC on experimental data:
+Done
+cre-gene pairs in experimental data missing from gene universe: 4
+Mapping cell types in predictions to cell types in experimental data
+
+Merging experimentals data and predictions:
+Overlapping predictions with experimental data for: ABC
+Computing baseline predictors:
+	distToTSS
+	distToGene
+	nearestTSS
+	nearestGene
+	within100kbTSS
+	nearestExprTSS
+	nearestExprGene
+	within100kbExprTSS
+
+All done!

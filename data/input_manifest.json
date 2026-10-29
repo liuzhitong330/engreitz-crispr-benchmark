@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/EngreitzLab/CRISPR_comparison",
+  "commit": "50587422e6b11259ead6fbc6f867681c788f39b7",
+  "retrieved": "2026-10-29",
+  "files": {
+    "resources/example/ABC_K562_Fulco2019Genes_GRCh38.tsv.gz": "4267039283e4dfbd40a4064200448c13b4d2106fa34bfb72da9950d0a5d84f84",
+    "resources/example/EPCrisprBenchmark_Fulco2019_K562_GRCh38.tsv.gz": "571a4bede14ac0454316bb67c1641054abb59abf033d3b4e7b9cc521cd1fbbf0",
+    "resources/example/ABC_cell_type_mapping.txt": "ae7fa7414275b31d63d3313c7a8f7e1f4a1abb93d7d0c92bf5a547625066e1cd",
+    "resources/example/pred_config.txt": "e9aa30888786e7718c3e2061f1632b1a337bdeac9e863875ebcb89ef1e763766",
+    "resources/genome_annotations/CollapsedGeneBounds.hg38.TSS500bp.bed": "d6ca051ea201dc0ba412ba2c8aab9d49b76cbc1b62953a119eb2c9172c09b5c2",
+    "resources/genome_annotations/CollapsedGeneBounds.hg38.bed": "d5830e39439f56dd2f3e6f70372673c1d8d9a1a35c898d8810fba1b76adeaa87",
+    "resources/genomic_features/K562_expressed_genes.tsv": "9aa425a9e24d5c1f30fff402ff8f6eea156355ac8ff28da874117983d936cdc0",
+    "config/config.yml": "d8942c35a955a5ed1e5b1ef979e8b6841f3eee27326701c8fde2796747608434",
+    "LICENSE": "71c9617ce42f9fff7978f659ce32a0ec3b2049511b05c8f1b20c9e57e9b07a84"
+  }
+}

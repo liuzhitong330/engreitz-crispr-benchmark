@@ -1,0 +1,5 @@
+upstream_commit	50587422e6b11259ead6fbc6f867681c788f39b7
+seed	20261029
+bootstrap_replicates	1000
+method	original merge script and original numerical report functions; no source edits
+html_report_rendered	FALSE

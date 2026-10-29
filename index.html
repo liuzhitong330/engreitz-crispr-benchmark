@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A reproducible reanalysis of saved ABC predictions and genomic distance on the Engreitz Lab's public K562 CRISPR benchmark.">
+  <title>Exploratory Analyses Inspired by the Engreitz Lab</title>
+  <link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+  <main class="page">
+    <h1>Exploratory Analyses Inspired by the Engreitz Lab</h1>
+    <div class="byline">
+      Cathy Liu · Computational biology · <a href="mailto:cathyliu014@gmail.com">cathyliu014@gmail.com</a><br>
+      Prepared for the Engreitz Lab, Stanford University<br>
+      Personal exploratory project, October 2026
+    </div>
+    <nav class="section-nav" aria-label="Demo sections">
+      <a href="#motivation">Motivation</a>
+      <a href="#a1">Benchmark</a>
+      <a href="#a2">Disagreements</a>
+      <a href="#relevance">Relevance</a>
+    </nav>
+
+    <p>Which gene does a regulatory element control? The Engreitz Lab connects computational predictions with perturbation experiments to answer this question. A useful first check is whether a prediction adds information beyond a simpler explanation: the element is close to the gene.</p>
+    <p>I built a small, reproducible comparison of saved Activity-by-Contact (ABC) predictions and genomic distance on the lab’s public K562 example. It follows the original benchmark, then makes distance ranges, missing predictions, and individual experimental disagreements inspectable. This is a reanalysis of existing evidence, not independent validation.</p>
+
+    <hr id="motivation">
+    <section aria-labelledby="how-heading">
+      <h2 id="how-heading">How it works</h2>
+      <p>Each observation is an experimentally tested regulatory element–gene pair. The two methods rank <em>the same pairs</em>: saved ABC power-law score, or proximity to the gene’s transcription start site. Precision asks how many top-ranked pairs show the source’s downregulatory response; recall asks how many of those responses the ranking recovers.</p>
+      <p>Average precision (AP) summarizes that ranking. The main analysis retains unmatched predictions at zero, as the official example does; the matched-only view checks how much that convention matters. No untested pair becomes a negative, and “not called downregulatory” is not proof of no regulatory effect.</p>
+    </section>
+
+    <hr id="a1">
+    <section aria-labelledby="analysis-one-heading">
+      <h2 id="analysis-one-heading">Analysis 1 — Does ABC add information beyond distance?</h2>
+      <div class="experiment">
+        <div class="exp-label">Result</div>
+        <div class="exp-title" id="main-finding">Compare the same experimentally tested pairs</div>
+        <p id="main-context">Loading the reproducible analysis…</p>
+      </div>
+
+      <div class="panel">
+        <div class="controls">
+          <div class="control">
+            <label for="cohort-select">Prediction coverage</label>
+            <select id="cohort-select">
+              <option value="all">All eligible pairs · official zero-fill policy</option>
+              <option value="matched">Matched predictions only · sensitivity check</option>
+            </select>
+          </div>
+          <div class="control">
+            <label for="range-select">Element–TSS distance</label>
+            <select id="range-select">
+              <option value="all">All distances</option>
+              <option value="0–20 kb">0–20 kb</option>
+              <option value="20–100 kb">20–100 kb</option>
+              <option value="100–2,500 kb">100–2,500 kb</option>
+            </select>
+          </div>
+        </div>
+        <figure class="interactive-figure">
+          <svg id="pr-chart" class="viz" viewBox="0 0 600 390" role="img" aria-labelledby="pr-title pr-description">
+            <title id="pr-title">Precision–recall comparison</title>
+            <desc id="pr-description">ABC and distance rankings for the selected experimental pairs.</desc>
+          </svg>
+          <figcaption id="chart-caption">The teal curve is ABC; the dashed gray curve is the distance baseline. The horizontal reference is the observed positive fraction.</figcaption>
+        </figure>
+        <div class="readout" id="readout" aria-live="polite" aria-atomic="true"></div>
+        <div class="action-line"><button id="export-cohort" class="text-button" type="button">Download these pairs (CSV)</button></div>
+      </div>
+
+      <div class="metric-row">
+        <div class="metric"><span class="metric-val" id="metric-abc">—</span><span class="metric-desc">ABC average precision</span></div>
+        <div class="metric"><span class="metric-val" id="metric-distance">—</span><span class="metric-desc">Distance average precision</span></div>
+        <div class="metric"><span class="metric-val" id="metric-pairs">—</span><span class="metric-desc" id="metric-pairs-label">experimentally tested pairs</span></div>
+      </div>
+      <p class="small-note" id="uncertainty-note"></p>
+      <p class="utility"><strong>What this lets the lab do:</strong> check whether an apparent ranking advantage persists at comparable distances and after excluding unscored pairs.</p>
+      <p class="utility"><strong>Where I hope to contribute:</strong> careful data alignment, reproducible comparisons, and traceable explanations of model–experiment disagreements. Implementation was AI-assisted; the analysis decisions and checks are documented for review.</p>
+
+      <details>
+        <summary>Distance-stratified comparison and downloadable figures</summary>
+        <figure>
+          <img src="figures/02-distance.svg" alt="Average precision and paired uncertainty across genomic-distance ranges, with coverage and sample sizes." loading="lazy">
+          <figcaption>Distance strata use the same experimental pairs for both methods. Intervals resample genes, not independent pairs. Small strata and shared genes limit inference.</figcaption>
+        </figure>
+        <p class="download-links"><a href="figures/01-pr.svg" download>Overall precision–recall figure</a> · <a href="figures/02-distance.svg" download>Distance figure</a> · <a href="figures/03-disagreement.svg" download>Pair-level figure</a></p>
+      </details>
+    </section>
+
+    <hr id="a2">
+    <section aria-labelledby="analysis-two-heading">
+      <h2 id="analysis-two-heading">Analysis 2 — Where do the predictions and experiments disagree?</h2>
+      <p>A useful disagreement needs context. Examine the original effect, adjusted <i>p</i>-value, reported power, and prediction coverage before deciding what to investigate next. The supplied ABC threshold of 0.02 is shown as a reference, not tuned on these experiments.</p>
+      <div class="chips" id="example-buttons"><span>Inspect:</span></div>
+      <form class="searchbar" id="gene-form">
+        <label class="sr-only" for="gene-search">Gene symbol in the current cohort</label>
+        <input id="gene-search" list="gene-options" autocomplete="off" placeholder="Search a gene, e.g. MYC">
+        <datalist id="gene-options"></datalist>
+        <button type="submit">Inspect gene</button>
+      </form>
+      <div class="control pair-control">
+        <label for="pair-select">Experimentally tested pair</label>
+        <select id="pair-select"></select>
+      </div>
+      <p class="small-note" id="pair-count"></p>
+      <div id="pair-view" aria-live="polite" aria-atomic="true">
+        <h3 id="pair-title">Select a tested pair</h3>
+        <p class="small-note" id="example-reason"></p>
+        <svg id="locus-chart" class="viz" viewBox="0 0 600 190" role="img" aria-labelledby="locus-title locus-description">
+          <title id="locus-title">Element and target gene location</title>
+          <desc id="locus-description">A linear genomic-distance schematic of the selected regulatory element and target transcription start site.</desc>
+        </svg>
+        <div class="pair-facts" id="pair-facts"></div>
+        <div class="experiment">
+          <div class="exp-label">Evidence, not a verdict</div>
+          <div class="exp-title" id="pair-category"></div>
+          <p id="pair-interpretation"></p>
+        </div>
+        <p class="small-note" id="pair-provenance"></p>
+      </div>
+      <details>
+        <summary>See all pairs in score–distance space</summary>
+        <figure>
+          <img src="figures/03-disagreement.svg" alt="Saved ABC score versus genomic distance, distinguished by the original downregulatory experimental label and whether a prediction is missing." loading="lazy">
+          <figcaption>Disagreements are candidates for investigation, not automatically model errors or failed experiments. Zero-filled missing predictions must be distinguished from low scored predictions.</figcaption>
+        </figure>
+      </details>
+    </section>
+
+    <hr id="relevance">
+    <section aria-labelledby="relevance-heading">
+      <h2 id="relevance-heading">Why this matters for the lab</h2>
+      <p>The useful output is a small audit trail: the same tested pairs, explicit missingness, distance-aware comparisons, and disagreements that can be traced back to their experimental evidence. This is an inferred opportunity for analysis, not a claim about the lab’s current internal bottleneck.</p>
+      <p><strong>A follow-up question:</strong> on a separate, pre-specified perturbation dataset, does ABC still add information within distance-matched groups after accounting for assay power? Freeze the cohort and scoring rules before inspecting outcomes. A persistent advantage would support transfer; a reduced advantage would motivate checking coverage, gene composition, and experimental sensitivity.</p>
+
+      <h2>What I would bring</h2>
+      <p>My single-cell analysis and Boolean-network modelling project in pancreatic cancer made me interested in turning expression patterns into testable biological questions. I would like to contribute careful data alignment, reproducible analysis, and clear communication between computational predictions and experiments—and develop these skills further in the lab.</p>
+
+      <h2>Methods note</h2>
+      <p class="methods-note">Processed public data from the <a href="https://www.engreitzlab.org/resources/">Engreitz Lab resources</a> and <a href="https://github.com/EngreitzLab/CRISPR_comparison/tree/50587422e6b11259ead6fbc6f867681c788f39b7">CRISPR_comparison</a>, pinned to commit <code>50587422e6b</code>. This is the repository’s saved K562 example, not the full CRISPR benchmark. It uses ABC <em>power-law</em> scores, not a newly trained model, measured Hi-C contacts, or the newer rE2G/scE2G methods.</p>
+      <details>
+        <summary>Matching, labels, missingness, and the official reproduction</summary>
+        <p>Matching follows the original workflow: genome-annotation gene symbols, mapped K562 cell identity, chromosome, and interval overlap. Genomic coordinates are GRCh38. Historical coordinates embedded in experimental names are identifiers only; the numeric coordinate columns are used for matching. Prediction elements overlapping the supplied TSS windows are filtered before matching. Multiple matching scores are summed.</p>
+        <p>The source’s <code>Regulated</code> label is retained. A significant increase in expression is not a downregulatory positive. The nonpositive group also contains less informative experiments: power and effect direction should be inspected, not erased by the binary label.</p>
+        <p id="official-result">The original R workflow’s precision–recall calculation is reported separately from average precision.</p>
+        <p>AP and trapezoidal area are different summaries and should not be interchanged. Distance bins include their lower bound and exclude their upper bound: [0, 20), [20, 100), and [100, 2,500) kb. This reused benchmark is not held-out biological validation. Gene-cluster bootstrap intervals describe uncertainty within this small, selected dataset; they do not establish generalization to other cell types or assays. Every transformation and exclusion is available in the repository outputs.</p>
+      </details>
+      <p class="download-links"><a href="README.md">README</a> · <a href="RESULTS.md">Results and limitations</a> · <a href="docs/walkthrough.md">Plain-language walkthrough</a> · <a href="scripts/reproduce.py">Runnable analysis</a></p>
+    </section>
+    <footer>
+      Cathy Liu · <a href="mailto:cathyliu014@gmail.com">cathyliu014@gmail.com</a> · <a href="tel:+14152163799">415-216-3799</a><br>
+      Exploratory reanalysis · public processed data · AI-assisted implementation
+    </footer>
+  </main>
+  <noscript><p class="no-script">JavaScript is needed for the interactive explorer. The <a href="RESULTS.md">results summary</a> and <a href="figures/01-pr.svg">static precision–recall figure</a> remain available.</p></noscript>
+  <script src="data.js?v=1"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+chrom	chromStart	chromEnd	name	EffectSize	chrTSS	startTSS	endTSS	measuredGeneSymbol	Significant	pValueAdjusted	PowerAtEffectSize25	ValidConnection	CellType	Reference	Regulated
+chr11	5280370	5281170	HBBP1|chr11:5301600-5302400:*	-0.81438	NA	NA	NA	HBBP1	TRUE	3.95e-25	0.25	Non-protein coding gene may not be included in ABC or other predictors	K562	Thakore2015	TRUE
+chr8	129581780	129582461	PVT1-TSS1|chr8:130594026-130594707:*	-0.030062	NA	NA	NA	PVT1-TSS1	FALSE	0.105553545	0.999999896	Non-protein coding gene may not be included in ABC or other predictors	K562	Fulco2019	FALSE
+chr8	129689360	129689694	PVT1-TSS1|chr8:130701606-130701940:*	-0.0501	NA	NA	NA	PVT1-TSS1	TRUE	0.002576425	1	Non-protein coding gene may not be included in ABC or other predictors	K562	Fulco2019	TRUE
+chr8	129692458	129693217	PVT1-TSS1|chr8:130704704-130705463:*	-0.053507	NA	NA	NA	PVT1-TSS1	TRUE	0.002576425	1	Non-protein coding gene may not be included in ABC or other predictors	K562	Fulco2019	TRUE

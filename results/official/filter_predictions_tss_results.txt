@@ -1,0 +1,2 @@
+pred_id	file	removed_elements	removed_predictions
+ABC	resources/example/ABC_K562_Fulco2019Genes_GRCh38.tsv.gz	2902	10606

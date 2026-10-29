@@ -1,0 +1,73 @@
+{
+  "experimental_rows": 5091,
+  "prediction_rows": 55039,
+  "prediction_rows_removed": 10606,
+  "prediction_rows_retained": 44433,
+  "valid_pairs": 3852,
+  "positives": 101,
+  "genes": 54,
+  "missing": 521,
+  "missing_positives": 7,
+  "missing_by_reason": {
+    "absent before TSS filter": 494,
+    "TSS-filtered only": 27
+  },
+  "overlap_multiplicity": {
+    "0": 521,
+    "1": 3213,
+    "2": 97,
+    "3": 19,
+    "4": 2
+  },
+  "endpoint_overlap_differences": 0,
+  "name_coordinate_disagreements": 3852,
+  "genes_original_tss_different": 53,
+  "prediction_ensembl_all_missing": true,
+  "prediction_distance_all_missing": true,
+  "negative_significant_increases": 31,
+  "negative_power_below_80pct": 2,
+  "experimental_references": {
+    "Fulco2019": 4676,
+    "Fulco2016": 203,
+    "Klann2017": 168,
+    "Xie2017": 11,
+    "Huang2018": 10,
+    "Liu2017": 6,
+    "Ulirsch2016": 5,
+    "Wakabayashi2016": 5,
+    "Thakore2015": 5,
+    "Qi2018": 1,
+    "Xu2015": 1
+  },
+  "evaluated_references": {
+    "Fulco2019": 3513,
+    "Fulco2016": 180,
+    "Klann2017": 122,
+    "Xie2017": 11,
+    "Huang2018": 10,
+    "Ulirsch2016": 5,
+    "Wakabayashi2016": 5,
+    "Thakore2015": 4,
+    "Qi2018": 1,
+    "Xu2015": 1
+  },
+  "original_label_mismatches": 0,
+  "genome": "GRCh38",
+  "cell_mapping": "K562_ID_2644 → K562",
+  "abc_threshold": 0.02,
+  "gene_identifier_join": "Exact symbols; no alias or Ensembl-ID remapping",
+  "distance_convention": "Upstream GRanges midpoint-to-TSS intervening bases; 1 less than absolute integer midpoint distance",
+  "official_comparison": {
+    "status": "PASS",
+    "pair_ids_labels_scores_distance_coverage": "All 3,852 pairs agree with original R functions",
+    "table_sha256": "be32df2770bfaf6431ac65837f4f3a9b05a3a189cf05bf58dc160fb92bcbbd6e"
+  },
+  "absolute_midpoint_distance_ap": 0.41403467968144025,
+  "midpoint_distance_max_difference_bp": 1.5,
+  "abc_threshold_counts": {
+    "true_positive": 70,
+    "not_down_called": 73,
+    "missed_positive": 31,
+    "low_score_no_down_call": 3678
+  }
+}
